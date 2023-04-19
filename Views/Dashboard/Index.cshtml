@@ -1,0 +1,41 @@
+﻿@model Dashboard
+@{
+
+    ViewData["Title"] = "Dashboard";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+
+
+<div>
+    <h1>Current Day</h1>
+    @foreach (var ship in Model.currentday)
+    {
+        <span>@ship.Traking</span>
+    }
+</div>
+<hr>
+
+<div>
+    <h1>In Progress</h1>
+    @foreach (var ship in Model.inprogress)
+    {
+        <span>@ship.Traking</span>
+    }
+</div>
+<hr>
+
+<div>
+    <h1>By Country</h1>
+    @foreach (var Key in Model.byCountry)
+    {
+
+        <h2>@Key.Key</h2>
+        @foreach (var i in Key)
+        {
+            <span> @i.Traking</span>
+        }
+
+    }
+</div>

@@ -1,0 +1,57 @@
+﻿@using AgenziaSpedizioni.Models;
+@model User
+@{
+
+    ViewData["Title"] = $"Edit Customer {Model.Id}";
+}
+
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <form class="row g-3" asp-action="EditCustomerPost" asp-route-id="@Model.Id" method="post">
+        <div class="col-md-6">
+            <label class="form-label">Name</label>
+            <input asp-for="@Model.Name" type="text" class="form-control" id="Name">
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Surname</label>
+            <input asp-for="@Model.Surname" type="text" class="form-control" id="Surname">
+        </div>
+        <div class="col-6">
+            <label class="form-label">Phone Number</label>
+            <input asp-for="@Model.Number" type="number" class="form-control" id="Number">
+        </div>
+        <div class="col-6">
+            <label class="form-label">Address</label>
+            <input asp-for="@Model.Address" type="text" class="form-control" id="Address">
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">City</label>
+            <input asp-for="@Model.City" type="text" class="form-control" id="City">
+        </div>
+        <div class="col-md-4">
+            <label for="Country" class="form-label">Country</label>
+            <input asp-for="@Model.Country" type="text" class="form-control" id="Country">
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Zip</label>
+            <input asp-for="@Model.Postal_Code" type="text" class="form-control" id="Postal_Code">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Customer Tye</label>
+            <select asp-for="@Model.Customer_Type"  class="form-control" id="Customer_Type">
+                <option value="Private">Private</option>
+                <option value="Business">Business</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Fiscal Code</label>
+            <input asp-for="@Model.CF" type="text" class="form-control" id="CF">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Vat</label>
+            <input asp-for="@Model.Vat" type="text" class="form-control" id="Vat">
+        </div>
+
+        <div class="col-12 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary btn-lg px-5 mt-3">Edit</button>
+        </div>
+    </form>

@@ -1,0 +1,87 @@
+﻿@using AgenziaSpedizioni.Models
+@model List<Shipment>
+@{
+
+    ViewData["Title"] = "Shipments";
+
+}
+
+
+
+
+<div class="container-fluid">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <button onclick="location.href='@Url.Action("AddShipment")'" class="btn btn-success">Add Shipment</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">User</th>
+                <th scope="col">Shipment Date</th>
+                <th scope="col">Receipt Date</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Address</th>
+                <th scope="col">Country</th>
+                <th scope="col">Price</th>
+                <th scope="col">Status</th>
+                <th scope="col">Tracking Code</th>
+
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ship in Model)
+            {
+                <tr>
+                    <th scope="row">@ship.Id</th>
+                    <td>@ship.user</td>
+                    <td>@ship.Shipment_Date</td>
+                    <td>@ship.Receipt_Date</td>
+                    <td>@ship.Weight</td>
+                    <td>@ship.Destination</td>
+                    <td>@ship.Address</td>
+                    <td>@ship.Country</td>
+                    <td>@ship.Price</td>
+                    <td>
+                        <form asp-action="UpdateStatus" asp-route-id="@ship.Id">
+                            @{
+                                var status = ship.Status;
+                                string location = "";
+                            }
+                            <select id="koala" asp-for="@status" onchange="$('#localModal_@ship.Id').modal('show');">
+                                <option value="" selected disabled hidden>Update Status</option>
+                                <option value="Accepted">Accepted</option>
+                                <option value="Transit">Transit</option>
+                                <option value="Delivered">Delivered</option>
+                            </select>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="localModal_@ship.Id" tabindex="-1" aria-labelledby="localModal" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Update location of @ship.Traking</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body d-flex flex-column justify-content-center">
+                                            <label>Insert Location</label>
+                                            <input asp-for="@location" type="text" placeholder="Location"/>
+                                        </div>
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            <button onclick="this.form.submit()" type="button" class="btn btn-primary">Update Status</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </td>
+                    <td>@ship.Traking</td>
+                    <td><a asp-action="EditShipment" asp-route-id="@ship.Id">Edit</a> <a asp-action="DeleteShipment" asp-route-id="@ship.Id">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+</div>
+</table>
+

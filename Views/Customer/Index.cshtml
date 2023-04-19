@@ -1,0 +1,61 @@
+﻿@using AgenziaSpedizioni.Models
+@model List<User>
+@{
+
+    ViewData["Title"] = "Customer";
+}
+
+
+
+
+<div class="container-fluid">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <button onclick="location.href='@Url.Action("AddCustomer")'" class="btn btn-success">Add Customer</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Number</th>
+                <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">Postal Code</th>
+                <th scope="col">Country</th>
+                <th scope="col">Customer Type</th>
+                <th scope="col">CF</th>
+                <th scope="col">Vat</th>
+                <th scope="col">Shipments</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usr in Model)
+            {
+                <tr>
+                    <th scope="row">@usr.Id</th>
+                    <td>@usr.Name</td>
+                    <td>@usr.Surname</td>
+                    <td>@usr.Number</td>
+                    <td>@usr.Address</td>
+                    <td>@usr.City</td>
+                    <td>@usr.Postal_Code</td>
+                    <td>@usr.Country</td>
+                    <td>@usr.Customer_Type</td>
+                    <td>@usr.CF</td>
+                    <td>@usr.Vat</td>
+                    <td>
+                        @if (usr.Shipments.Any())
+                        {
+                            foreach (var ship in @usr.Shipments)
+                            {
+                                <span>@ship &nbsp;</span>
+                            }
+                        }
+                    </td>
+                    <td><a asp-action="EditCustomer" asp-route-id="@usr.Id">Edit</a> <a asp-action="DeleteCustomer" asp-route-id="@usr.Id">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+</div>
+</table>

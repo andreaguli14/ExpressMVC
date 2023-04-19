@@ -1,0 +1,16 @@
+﻿@model List<Shipment>
+@{
+
+    ViewData["Title"] = $"Tracking List";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+@foreach (var shipment in Model)
+{
+    
+   <span> @Html.ActionLink(shipment.Traking, "TrackingStatus", "Tracking", new { tracking = shipment.Traking }) </span>
+    
+}
+

@@ -1,0 +1,53 @@
+﻿@using AgenziaSpedizioni.Models;
+@using AgenziaSpedizioni.Data;
+@model Shipment
+@inject ApplicationDbContext db
+@{
+
+    ViewData["Title"] = $"Edit Shipment {Model.Id}";
+}
+
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+<form class="row g-3" asp-action="EditShipmentPost" asp-route-id="@Model.Id" method="post">
+    <div class="col-md-4">
+        <label class="form-label">From customer: </label>
+        <select asp-for="@Model.user" class="form-control" id="user">
+        @foreach (var user in db.Users) {
+            <option value="@user.Id">@user.Name @user.Surname</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Shipment Date</label>
+        <input asp-for="@Model.Shipment_Date" type="date" class="form-control" id="Shipment_Date">
+    </div>
+    <div class="col-4">
+        <label class="form-label">Receipt Date</label>
+        <input asp-for="@Model.Receipt_Date" type="date" class="form-control" id="Receipt_Date">
+    </div>
+    <div class="col-4">
+        <label class="form-label">Country</label>
+        <input asp-for="@Model.Country" type="text" class="form-control" id="Country">
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Address</label>
+        <input asp-for="@Model.Address" type="text" class="form-control" id="Address">
+    </div>
+    <div class="col-md-4">
+        <label for="Country" class="form-label">Destination</label>
+        <input asp-for="@Model.Destination" type="text" class="form-control" id="Destination">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Weight</label>
+        <input asp-for="@Model.Weight" type="number" class="form-control" id="Weight">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Price</label>
+        <input asp-for="@Model.Price" type="number" class="form-control" id="Price">
+    </div>
+
+    <div class="col-12 d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary btn-lg px-5 mt-3">Edit</button>
+    </div>
+</form>

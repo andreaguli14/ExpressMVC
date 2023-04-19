@@ -1,0 +1,31 @@
+﻿@using AgenziaSpedizioni.Models;
+@using AgenziaSpedizioni.Data;
+@model Shipment
+@inject ApplicationDbContext _db
+@{
+
+    ViewData["Title"] = $"Tracking Status of {Model.Traking}";
+    var status = _db.Statuses.FirstOrDefault(x => x.Shipment_Id.Equals(Model.Id));
+
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+@if (status.Accepted)
+{
+    <h2>Accepted in Date @status.Accepted_Time  Location: @status.Accepted_Location </h2>
+
+}
+
+@if (status.Transit)
+{
+    <h2>On transit in Date @status.Transit_Time  Location: @status.Transit_Location </h2>
+
+}
+
+@if (status.Delivered)
+{
+    <h2>Delivered in Date @status.Delivered_Time  Location: @status.Delivered_Location</h2>
+
+}
